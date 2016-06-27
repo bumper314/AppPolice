@@ -1,5 +1,5 @@
 //
-//  AppInspectorController.m
+//  AppInspector.m
 //  AppPolice
 //
 //  Created by Maksym on 7/2/13.
@@ -36,25 +36,25 @@
 
 @implementation AppInspector
 
+@synthesize appView = _appView;
+
 - (id)init {
 	self = [super init];
 	if (self) {
-		[NSBundle loadNibNamed:@"AppInspector" owner:self];
-		[NSBundle loadNibNamed:@"PopoverContentView" owner:self];
+		[NSBundle loadNibNamed:@"AppInspectorView" owner:self];
 	}
 	return self;
 }
 
 
 - (void)dealloc {
-	[_hintPopover release];
 	[super dealloc];
 }
 
 
 - (void)awakeFromNib {
 	// Set popover content view
-	[_popoverViewController setView:_popoverView];
+	[_appViewController setView:_appView];
 	int ncpu = system_ncpu();
 	
 	[_slider setContinuous:YES];
@@ -64,17 +64,21 @@
 	[_levelIndicator setCriticalValue:7.5];
 	[_sliderMiddleTextfield setStringValue:[NSString stringWithFormat:@"%d%%", (ncpu > 2) ? 100 : ncpu / 2 * 100]];
 	[_sliderRightTextfield setStringValue:[NSString stringWithFormat:@"%d%%", ncpu * 100]];
-    
+
+    [_applicationNameTextfield setFont:[NSFont systemFontOfSize:14]];
+
+	/*
     [_applicationNameTextfield setDrawsBackground:YES];
     [_applicationNameTextfield setBackgroundColor:[NSColor clearColor]];
     [_applicationUserTextfield setDrawsBackground:YES];
     [_applicationUserTextfield setBackgroundColor:[NSColor clearColor]];
     [_applicationCPUTextfield setDrawsBackground:YES];
     [_applicationCPUTextfield setBackgroundColor:[NSColor clearColor]];
+	*/
 }
 
 
-- (CMMenuItem *)attachedToItem {
+- (NSMenuItem *)attachedToItem {
 	return _attachedToItem;
 }
 
@@ -82,7 +86,7 @@
 /*
  *
  */
-- (void)setAttachedToItem:(CMMenuItem *)attachedToItem {
+- (void)setAttachedToItem:(NSMenuItem *)attachedToItem {
 	if (attachedToItem == _attachedToItem)
 		return;
 	
@@ -104,8 +108,7 @@
 	// Technics used to load default images (kept for reference)
 	// NSImage *genericIcon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericExtensionIcon)];
 	// NSImage *genericIcon = [[NSWorkspace sharedWorkspace] iconForFile:@"/bin/ls"];
-	
-	[icon setSize:[_applicationIcon frame].size];
+
 	[_applicationIcon setImage:icon];
 	[_applicationNameTextfield setStringValue:[NSString stringWithFormat:@"%@ (%d)", name, pid]];
 	
@@ -125,11 +128,11 @@
 			[_applicationUserTextfield setStringValue:NSLocalizedString(@"No such process", @"AppInspector")];
 		} else if (errno == EPERM) {
 			[[_applicationUserTextfield cell] setWraps:YES];
-			[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
+			//[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
 			[_applicationUserTextfield setStringValue:NSLocalizedString(@"No permission to access process information", @"AppInspector")];
 		} else {
 			[[_applicationUserTextfield cell] setWraps:YES];
-			[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
+			//[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
 			[_applicationUserTextfield setStringValue:NSLocalizedString(@"Error accessing process information", @"AppInspector")];
 		}
 		[_applicationCPUTextfield setStringValue:@""];
@@ -144,7 +147,7 @@
 		// Reset params
 		if ([[_applicationUserTextfield cell] wraps]) {
 			[[_applicationUserTextfield cell] setWraps:NO];
-			[_applicationUserTextfield setPreferredMaxLayoutWidth:0.0];
+			//[_applicationUserTextfield setPreferredMaxLayoutWidth:0.0];
 		}
 		// Basically, we handled to possible process access permission problem above
 		// so this should always evaluate to true.
@@ -169,16 +172,6 @@
 		NSDictionary *timerUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:pid], @"pid", nil];
 		_cpuTimer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(cpuTimerFire:) userInfo:timerUserInfo repeats:YES];
 		[[NSRunLoop currentRunLoop] addTimer:_cpuTimer forMode:NSRunLoopCommonModes];
-	}
-	
-	if ([_popover isShown]) {
-		// post notification about popover having been updated
-//		NSLog(@"postnotification from setAttached");
-		NSNotification *postNotification = [NSNotification notificationWithName:APAppInspectorPopoverDidShow object:self userInfo:nil];
-		[[NSNotificationQueue defaultQueue] enqueueNotification:postNotification
-												   postingStyle:NSPostASAP
-												   coalesceMask:NSNotificationCoalescingOnName
-													   forModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
 	}
 }
 
@@ -206,11 +199,11 @@
 			[_applicationUserTextfield setStringValue:NSLocalizedString(@"No such process", @"AppInspector")];
 		} else if (errno == EPERM) {
 			[[_applicationUserTextfield cell] setWraps:YES];
-			[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
+			//[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
 			[_applicationUserTextfield setStringValue:NSLocalizedString(@"No permission to access process information", @"AppInspector")];
 		} else {
 			[[_applicationUserTextfield cell] setWraps:YES];
-			[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
+			//[_applicationUserTextfield setPreferredMaxLayoutWidth:150.0];
 			[_applicationUserTextfield setStringValue:NSLocalizedString(@"Error accessing process information", @"AppInspector")];
 		}
 		[_applicationCPUTextfield setStringValue:@""];
@@ -434,97 +427,5 @@
 
 	return value;
 }
-
-
-- (void)limitHintViewMouseUpNotification:(NSNotification *)notification {
-	if (! _hintPopover) {
-		_hintPopover = [[NSPopover alloc] init];
-		NSViewController *popoverViewController = [[[NSViewController alloc] init] autorelease];
-		NSView *view = [[[NSView alloc] initWithFrame:NSMakeRect(0, 0, 10, 10)] autorelease];
-		[popoverViewController setView:view];
-		[_hintPopover setContentViewController:popoverViewController];
-		[_hintPopover setAppearance:NSPopoverAppearanceHUD];
-		[_hintPopover setBehavior:NSPopoverBehaviorTransient];
-		NSTextField *textField = [[[NSTextField alloc] init] autorelease];
-		[[textField cell] setWraps:YES];
-		[textField setPreferredMaxLayoutWidth:150.0];
-		// String: Limit values greater then 100% cover multiple cores of CPU with 100% for each core.
-		[textField setStringValue:NSLocalizedString(@"Hint_popover_string", @"AppInspector, a hint popover for limit value greater then 100%")];
-		[textField setFont:[NSFont systemFontOfSize:10]];
-		[textField setTextColor:[NSColor colorWithCalibratedWhite:0.8 alpha:1.0]];
-		[textField setBordered:NO];
-		[textField setBezeled:NO];
-		[textField setBezelStyle:NSTextFieldSquareBezel];
-		[textField setDrawsBackground:NO];
-		[textField setEditable:NO];
-		[textField setRefusesFirstResponder:YES];
-
-		[view addSubview:textField];
-		[textField setTranslatesAutoresizingMaskIntoConstraints:NO];
-		NSMutableArray *constraints = [NSMutableArray arrayWithArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-[textField(<=150)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(textField)]];
-		[constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(15)-[textField]-(15)-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(textField)]];
-		[view addConstraints:constraints];
-	}
-	
-	if (! [_hintPopover isShown]) {
-		AppLimitHintView *hintView = (AppLimitHintView *)[notification object];
-		[_hintPopover showRelativeToRect:[hintView bounds] ofView:hintView preferredEdge:NSMaxYEdge];
-	}
-}
-
-
-- (NSPopover *)popover {
-	return _popover;
-}
-
-
-- (void)setPopverDidCloseHandler:(void (^)(void))handler {
-	if (_popoverDidClosehandler != handler)
-		_popoverDidClosehandler = handler;
-}
-
-
-// temp method
-//- (void)showPopoverRelativeTo:(NSView *)view {
-//	[_popover showRelativeToRect:[view bounds] ofView:view preferredEdge:NSMaxXEdge];
-//}
-
-
-
-- (void)popoverDidShow:(NSNotification *)notification {
-	[_popover setAnimates:NO];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(limitHintViewMouseUpNotification:) name:APAppLimitHintMouseDownNotification object:nil];
-
-	NSNotification *postNotification = [NSNotification notificationWithName:APAppInspectorPopoverDidShow object:self userInfo:nil];
-	[[NSNotificationQueue defaultQueue] enqueueNotification:postNotification
-											   postingStyle:NSPostNow
-											   coalesceMask:NSNotificationCoalescingOnName
-												   forModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-}
-
-
-- (void)popoverWillClose:(NSNotification *)notification {
-	[_popover setAnimates:YES];
-}
-
-
-- (void)popoverDidClose:(NSNotification *)notification {
-	if (_cpuTimer) {
-		[_cpuTimer invalidate];
-		_cpuTimer = nil;
-	}
-	
-	if (_attachedToItem) {
-		if ([_attachedToItem state] == NSMixedState)
-			[_attachedToItem setState:NSOffState];
-		[[_attachedToItem menu] setSuspendMenus:NO];
-		[[_attachedToItem menu] setCancelsTrackingOnMouseEventOutsideMenus:YES];
-	}
-	[self setAttachedToItem:nil];
-	if (_popoverDidClosehandler)
-		_popoverDidClosehandler();
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:APAppLimitHintMouseDownNotification object:nil];
-}
-
 
 @end

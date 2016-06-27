@@ -11,7 +11,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 {
 	@private
-	StatusbarItemController *_statusbarItemController;
+	NSStatusItem *_statusbarItem;
 	StatusbarMenuController *_statusbarMenuController;
 }
 

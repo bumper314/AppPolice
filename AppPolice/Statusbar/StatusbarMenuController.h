@@ -7,25 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ChromeMenu/ChromeMenu.h>
 
 #define APApplicationsSortedByName 0
 #define APApplicationsSortedByPid 1
 
 @class AppInspector;
 
-@interface StatusbarMenuController : NSObject<CMMenuDelegate>
+@interface StatusbarMenuController : NSObject<NSMenuDelegate>
 {
 	@private;
-	CMMenu *_mainMenu;
+	NSMenu *_mainMenu;
 	NSMutableArray *_runningApplications;
 	NSMutableArray *_runningSystemProcesses;
+	NSMenuItem *_appInspectorItem;
 	int _sortKey;
 	BOOL _orderAsc;
 	AppInspector *_appInspector;
 }
 
-- (CMMenu *)mainMenu;
+- (NSMenu *)mainMenu;
 
 // Default is |APApplicationsSortedByName|
 - (int)sortKey;

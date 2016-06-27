@@ -8,7 +8,6 @@
 
 #import "StatusbarMenuController.h"
 #import "AppInspector.h"
-#import "APAboutWindowController.h"
 #import "APPreferencesController.h"
 #include <libproc.h>
 #include "app_inspector_c.h"
@@ -40,13 +39,12 @@ extern int gAPAllLimitsPaused;
 	BOOL _showAllProcesses;
 	BOOL _showOtherUsersProcesses;
 	NSMutableArray *_limitedProcessItems;
-	APAboutWindowController *_aboutWindowConstroller;
 	APPreferencesController *_preferencesWindowController;
 	BOOL _userDefaultsDidChange;
 }
 
 - (void)setupMenus;
-- (void)populateMenu:(CMMenu *)menu withApplications:(NSArray *)runningApplications andSystemProcesses:(NSArray *)runningSystemProcesses;
+- (void)populateMenu:(NSMenu *)menu withApplications:(NSArray *)runningApplications andSystemProcesses:(NSArray *)runningSystemProcesses;
 /*!
   @abstract Makes changes to _runningApplications  and _runningSystemProcesses arrays
  	by removing processes that are no longer running, and adding new ones in
@@ -76,7 +74,7 @@ extern int gAPAllLimitsPaused;
 - (void)selectProcessMenuAction:(id)sender;
 - (void)toggleLimiterMenuAction:(id)sender;
 /*!
- @discussion CMMenu is built to instantly update when either title,
+ @discussion NSMenu is built to instantly update when either title,
 	image, etc. is changed. This method is used to delay title update
 	after Action performs and menu is hidden.
 */
@@ -91,7 +89,7 @@ extern int gAPAllLimitsPaused;
 	state) and enables or disables Pause menu item depending on the number
 	of processes currently being limited.
  */
-- (void)processOfItem:(CMMenuItem *)item didChangeLimit:(float)limit;
+- (void)processOfItem:(NSMenuItem *)item didChangeLimit:(float)limit;
 
 @end
 
@@ -135,41 +133,40 @@ extern int gAPAllLimitsPaused;
  *
  */
 - (void)setupMenus {
-	CMMenu *runningAppsMenu;
-	CMMenuItem *item;
+	NSMenu *runningAppsMenu;
+	NSMenuItem *item;
 	
-	_mainMenu = [[CMMenu alloc] initWithTitle:@"MainMenu"];
-	item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"Running Apps", @"Menu Item")
+	_mainMenu = [[NSMenu alloc] initWithTitle:@"MainMenu"];
+	item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Running Apps", @"Menu Item")
 									   action:NULL] autorelease];
-	runningAppsMenu = [[[CMMenu alloc] initWithTitle:@"Running Apps Menu"] autorelease];
-	[runningAppsMenu setPerformsActionInstantly:YES];
+	runningAppsMenu = [[[NSMenu alloc] initWithTitle:@"Running Apps Menu"] autorelease];
 	[runningAppsMenu setDelegate:self];
-	[runningAppsMenu setCancelsTrackingOnAction:NO];
-//	[runningAppsMenu setCancelsTrackingOnMouseEventOutsideMenus:NO];
 	[item setSubmenu:runningAppsMenu];
 	[_mainMenu addItem:item];
+
+	_appInspectorItem = [[NSMenuItem alloc] init];
 	
-	item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"Pause all limits", @"Menu Item")
+	item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Pause all limits", @"Menu Item")
 									   action:@selector(toggleLimiterMenuAction:)] autorelease];
 	[item setTarget:self];
 	[item setEnabled:NO];
 	[_mainMenu addItem:item];
 	
-	[_mainMenu addItem:[CMMenuItem separatorItem]];
+	[_mainMenu addItem:[NSMenuItem separatorItem]];
 	
-//	item = [[[CMMenuItem alloc] initWithTitle:@"Donate" action:NULL] autorelease];
+//	item = [[[NSMenuItem alloc] initWithTitle:@"Donate" action:NULL] autorelease];
 //	[item setTarget:self];
 //	[_mainMenu addItem:item];
-	item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"About AppPolice", @"Menu Item")
+	item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"About AppPolice", @"Menu Item")
 									   action:@selector(showAboutWindowMenuAction:)] autorelease];
 	[item setTarget:self];
 	[_mainMenu addItem:item];
-	item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"Preferences...", @"Menu Item")
+	item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Preferences...", @"Menu Item")
 									   action:@selector(showPreferecesWindowMenuAction:)] autorelease];
 	[item setTarget:self];
 	[_mainMenu addItem:item];
-	[_mainMenu addItem:[CMMenuItem separatorItem]];
-	item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit AppPolice", @"Menu Item")
+	[_mainMenu addItem:[NSMenuItem separatorItem]];
+	item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Quit AppPolice", @"Menu Item")
 									   action:@selector(terminateApplicationMenuAction:)] autorelease];
 	[item setTarget:self];
 	[_mainMenu addItem:item];
@@ -202,10 +199,6 @@ extern int gAPAllLimitsPaused;
 	// Subscribe to notifications
 	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 	[notificationCenter addObserver:self
-						   selector:@selector(menuDidEndTrackingNotificationHandler:)
-							   name:CMMenuDidEndTrackingNotification
-							 object:nil];
-	[notificationCenter addObserver:self
 						   selector:@selector(processDidChangeLimitNotificationHandler:)
 							   name:APAppInspectorProcessDidChangeLimit
 							 object:nil];
@@ -229,7 +222,7 @@ extern int gAPAllLimitsPaused;
 /*
  *
  */
-- (void)populateMenu:(CMMenu *)menu withApplications:(NSArray *)runningApplications andSystemProcesses:(NSArray *)runningSystemProcesses {
+- (void)populateMenu:(NSMenu *)menu withApplications:(NSArray *)runningApplications andSystemProcesses:(NSArray *)runningSystemProcesses {
 	if (! menu)
 		return;
     
@@ -244,16 +237,16 @@ extern int gAPAllLimitsPaused;
 //	pid_t shared_pid = getpid();
 //	NSUInteger shared_pid_index = UINT_MAX;
 	NSUInteger systemProcessesCount = [runningSystemProcesses count];
-	CMMenuItem *item;
+	NSMenuItem *item;
 	NSImage *onStateImageActive = [NSImage imageNamed:NSImageNameStatusAvailable];
 	NSImage *onStateImagePaused = [NSImage imageNamed:NSImageNameStatusPartiallyAvailable];
-	[onStateImageActive setSize:NSMakeSize(12, 12)];
-	[onStateImagePaused setSize:NSMakeSize(12, 12)];
+	[onStateImageActive setSize:NSMakeSize(16, 16)];
+	[onStateImagePaused setSize:NSMakeSize(16, 16)];
 	
 	// Show Applications delimiter
 //	if (_showAllProcesses) {
 	if (systemProcessesCount) {
-		item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"Applications", @"Delimiter Menu Item")
+		item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"Applications", @"Delimiter Menu Item")
 										   action:NULL] autorelease];
 		[item setEnabled:NO];
 		[menu addItem:item];
@@ -278,6 +271,7 @@ extern int gAPAllLimitsPaused;
 			if (! icon)
 				icon = [[NSWorkspace sharedWorkspace] iconForFileType:NSFileTypeForHFSTypeCode(kGenericApplicationIcon)];
 		}
+		[icon setSize:NSMakeSize(32, 32)];
         
         NSString *applicationName = [app localizedName];
         NSNumber *limit = @0.0;
@@ -294,7 +288,7 @@ extern int gAPAllLimitsPaused;
             APApplicationInfoLimitKey: limit
         } mutableCopy] autorelease];
 				
-		item = [[[CMMenuItem alloc] initWithTitle:[app localizedName]
+		item = [[[NSMenuItem alloc] initWithTitle:[app localizedName]
 											 icon:icon
 										   action:@selector(selectProcessMenuAction:)] autorelease];
 		[item setTarget:self];
@@ -320,7 +314,7 @@ extern int gAPAllLimitsPaused;
 	// -----------------------------------------------------
 //	if (_showAllProcesses) {
     if (systemProcessesCount) {
-        item = [[[CMMenuItem alloc] initWithTitle:NSLocalizedString(@"System", @"Delimiter Menu Item")
+        item = [[[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"System", @"Delimiter Menu Item")
                                            action:NULL] autorelease];
         [item setEnabled:NO];
         [menu addItem:item];
@@ -344,7 +338,7 @@ extern int gAPAllLimitsPaused;
                 APApplicationInfoLimitKey: limit
             } mutableCopy] autorelease];
             
-            CMMenuItem *item = [[[CMMenuItem alloc] initWithTitle:processName
+            NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:processName
                                                              icon:genericIcon
                                                            action:@selector(selectProcessMenuAction:)] autorelease];
             [item setTarget:self];
@@ -367,7 +361,7 @@ extern int gAPAllLimitsPaused;
 										[NSNumber numberWithInt:999], APApplicationInfoPidKey,
 										[NSNumber numberWithFloat:0], APApplicationInfoLimitKey, nil];
 		
-		CMMenuItem *item = [[[CMMenuItem alloc] initWithTitle:@"Some really long name for some unexistant applicaton" icon:[NSImage imageNamed:NSImageNameBonjour] action:@selector(selectProcessMenuAction:)] autorelease];
+		NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:@"Some really long name for some unexistant applicaton" icon:[NSImage imageNamed:NSImageNameBonjour] action:@selector(selectProcessMenuAction:)] autorelease];
 		[item setTarget:self];
 		[item setRepresentedObject:appInfo];
 		[menu addItem:item];
@@ -627,7 +621,7 @@ extern int gAPAllLimitsPaused;
 /*
  *
  */
-- (void)menuNeedsUpdate:(CMMenu *)menu {
+- (void)menuNeedsUpdate:(NSMenu *)menu {
 	BOOL userDefaultsDidChange = NO;
 	
 	// Verify if defaults did change from the last time menu was displayed
@@ -703,7 +697,7 @@ extern int gAPAllLimitsPaused;
 			// If any of the processes represented by menu item was limited before
 			// pass its pid to limit handler method to remove it from array
 			[[menu itemArray] enumerateObjectsAtIndexes:shiftedIndexes options:0 usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-				[self processOfItem:(CMMenuItem *)obj didChangeLimit:PROCESS_NOT_LIMITED];
+				[self processOfItem:(NSMenuItem *)obj didChangeLimit:PROCESS_NOT_LIMITED];
 			}];
 			
 			[menu removeItemsAtIndexes:shiftedIndexes];
@@ -736,12 +730,12 @@ extern int gAPAllLimitsPaused;
                     APApplicationInfoLimitKey: limit
                 } mutableCopy] autorelease];
 				
-				CMMenuItem *item = [[[CMMenuItem alloc] initWithTitle:[procInfo objectForKey:kProcNameKey]
+				NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:[procInfo objectForKey:kProcNameKey]
 																 icon:genericIcon
 															   action:@selector(selectProcessMenuAction:)] autorelease];
 				[item setTarget:self];
 				NSImage *onStateImage = [NSImage imageNamed:NSImageNameStatusAvailable];
-				[onStateImage setSize:NSMakeSize(12, 12)];
+				[onStateImage setSize:NSMakeSize(16, 16)];
 				[item setOnStateImage:onStateImage];
 				[item setRepresentedObject:appInfo];
 				if (_showAllProcesses)
@@ -822,12 +816,12 @@ extern int gAPAllLimitsPaused;
         APApplicationInfoLimitKey: limit
     } mutableCopy] autorelease];
 	
-	CMMenuItem *item = [[[CMMenuItem alloc] initWithTitle:[app localizedName]
+	NSMenuItem *item = [[[NSMenuItem alloc] initWithTitle:[app localizedName]
 													 icon:[app icon]
 												   action:@selector(selectProcessMenuAction:)] autorelease];
 	[item setTarget:self];
 	NSImage *onStateImage = [NSImage imageNamed:NSImageNameStatusAvailable];
-	[onStateImage setSize:NSMakeSize(12, 12)];
+	[onStateImage setSize:NSMakeSize(16, 16)];
 	[item setOnStateImage:onStateImage];
 	[item setRepresentedObject:appInfo];
 	if (_showAllProcesses)
@@ -853,17 +847,9 @@ extern int gAPAllLimitsPaused;
 			// If showing all process, the first menu item is "Applications". Shift index by 1
 			NSInteger menuIndex = (_showAllProcesses) ? (NSInteger)(index + 1) : (NSInteger)index;
 			
-			CMMenu *menu = [[_mainMenu itemAtIndex:0] submenu];
-			CMMenuItem *item = [menu itemAtIndex:menuIndex];
+			NSMenu *menu = [[_mainMenu itemAtIndex:0] submenu];
+			NSMenuItem *item = [menu itemAtIndex:menuIndex];
 			AppInspector *appInspector = [self appInspector];
-			NSPopover *popover = [appInspector popover];
-			if ([popover isShown]) {
-				CMMenuItem *attachedToItem = [appInspector attachedToItem];
-				if (attachedToItem == item) {
-					[popover setAnimates:YES];
-					[popover close];
-				}
-			}
 			[self processOfItem:item didChangeLimit:PROCESS_NOT_LIMITED];
 			[menu removeItemAtIndex:menuIndex animate:NO];
 
@@ -879,7 +865,7 @@ extern int gAPAllLimitsPaused;
 - (void)processDidChangeLimitNotificationHandler:(NSNotification *)notification {
 	NSDictionary *userInfo = [notification userInfo];
 
-	CMMenuItem *item = [userInfo objectForKey:@"menuItem"];
+	NSMenuItem *item = [userInfo objectForKey:@"menuItem"];
 	NSDictionary *representedObj = [item representedObject];
 	if (! representedObj)
 		return;
@@ -892,8 +878,8 @@ extern int gAPAllLimitsPaused;
 /*
  *
  */
-- (void)processOfItem:(CMMenuItem *)item didChangeLimit:(float)limit {
-	CMMenuItem *pauseItem = [_mainMenu itemAtIndex:1];
+- (void)processOfItem:(NSMenuItem *)item didChangeLimit:(float)limit {
+	NSMenuItem *pauseItem = [_mainMenu itemAtIndex:1];
 	BOOL pauseItemIsEnabled = YES;
 	BOOL allLimitsPaused = [[pauseItem representedObject] boolValue];
 	
@@ -922,23 +908,20 @@ extern int gAPAllLimitsPaused;
  *
  */
 - (void)selectProcessMenuAction:(id)sender {
-	CMMenuItem *item = (CMMenuItem *)sender;
+	NSBeep();
+	/*
+	NSMenuItem *item = (NSMenuItem *)sender;
 	AppInspector *appInspector = [self appInspector];
 	NSPopover *popover = [appInspector popover];
 
 	if ([popover isShown]) {
-		CMMenuItem *attachedToItem = [appInspector attachedToItem];
+		NSMenuItem *attachedToItem = [appInspector attachedToItem];
 		if ([attachedToItem state] == NSMixedState)
 			[attachedToItem setState:NSOffState];
 
 		if (attachedToItem == item) {
 			[popover setAnimates:YES];
 			[popover close];
-			[[NSNotificationCenter defaultCenter] removeObserver:self
-															name:CMMenuSuspendStatusDidChangeNotification
-														  object:nil];
-			[[item menu] setSuspendMenus:NO];
-			[[item menu] setCancelsTrackingOnMouseEventOutsideMenus:YES];
 			[appInspector setAttachedToItem:nil];
 		} else {
 			[appInspector setAttachedToItem:item];
@@ -948,38 +931,12 @@ extern int gAPAllLimitsPaused;
 		}
 	} else {
 		[appInspector setAttachedToItem:item];
-		[[item menu] setSuspendMenus:YES];
-		[[item menu] setCancelsTrackingOnMouseEventOutsideMenus:NO];
 		[[item menu] showPopover:popover forItem:item preferredEdge:NSMaxXEdge];
 		if ([item state] == NSOffState)
 			[item setState:NSMixedState];
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(menuSuspendStatusDidChangeNotificationHandler:)
-													 name:CMMenuSuspendStatusDidChangeNotification
-												   object:nil];
 	}
+	*/
 }
-
-
-- (void)menuDidEndTrackingNotificationHandler:(NSNotification *)notification {
-	NSPopover *popover = [[self appInspector] popover];
-	if ([popover isShown]) {
-		[popover close];
-	}
-}
-
-
-- (void)menuSuspendStatusDidChangeNotificationHandler:(NSNotification *)notification {
-	NSPopover *popover = [[self appInspector] popover];
-	if ([popover isShown]) {
-		[popover setAnimates:YES];
-		[popover close];
-		[[NSNotificationCenter defaultCenter] removeObserver:self
-														name:CMMenuSuspendStatusDidChangeNotification
-													  object:nil];
-	}
-}
-
 
 - (void)userDefaultsDidChangeNotificationHandler:(NSNotification *)notification {
 	_userDefaultsDidChange = YES;
@@ -990,7 +947,7 @@ extern int gAPAllLimitsPaused;
  *
  */
 - (void)toggleLimiterMenuAction:(id)sender {
-	CMMenuItem *item = (CMMenuItem *)sender;
+	NSMenuItem *item = (NSMenuItem *)sender;
 	int state = [[item representedObject] intValue];
 
 	if (state == ALL_LIMITS_PAUSED) {	// resume
@@ -1000,7 +957,7 @@ extern int gAPAllLimitsPaused;
 				   withObject:@{ @"item" : item, @"title" : NSLocalizedString(@"Pause all limits", @"Menu Item") }
 				   afterDelay:0.2];
 		[item setRepresentedObject:[NSNumber numberWithBool:!ALL_LIMITS_PAUSED]];
-		for (CMMenuItem *item in _limitedProcessItems) {
+		for (NSMenuItem *item in _limitedProcessItems) {
 			[item setOnStateImage:[NSImage imageNamed:NSImageNameStatusAvailable]];
 		}
 	} else {	// pause
@@ -1010,7 +967,7 @@ extern int gAPAllLimitsPaused;
 				   withObject:@{ @"item" : item, @"title" : NSLocalizedString(@"Resume", @"Menu Item") }
 				   afterDelay:0.2];
 		[item setRepresentedObject:[NSNumber numberWithBool:ALL_LIMITS_PAUSED]];
-		for (CMMenuItem *item in _limitedProcessItems) {
+		for (NSMenuItem *item in _limitedProcessItems) {
 			[item setOnStateImage:[NSImage imageNamed:NSImageNameStatusPartiallyAvailable]];
 		}
 	}
@@ -1020,7 +977,7 @@ extern int gAPAllLimitsPaused;
 /* Helper method to update menu item with new title after
 	a certain delay */
 - (void)updateMenuItemWithTitle:(NSDictionary *)itemAndTitle {
-	CMMenuItem *item = [itemAndTitle objectForKey:@"item"];
+	NSMenuItem *item = [itemAndTitle objectForKey:@"item"];
 	NSString *aString = [itemAndTitle objectForKey:@"title"];
 	[item setTitle:aString];
 }
@@ -1030,17 +987,18 @@ extern int gAPAllLimitsPaused;
  *
  */
 - (void)showAboutWindowMenuAction:(id)sender {
-	if (! _aboutWindowConstroller) {
-		_aboutWindowConstroller = [[APAboutWindowController alloc] init];
+	[NSApp activateIgnoringOtherApps:YES];
+
+	[NSApp orderFrontStandardAboutPanel:sender];
+	// HACK raise the About panel so it's above the Prefs
+	NSArray *windows = [NSApp windows];
+	for(NSWindow *win in windows) {
+		if ([win level] < NSFloatingWindowLevel) {
+			[win setLevel:NSFloatingWindowLevel];
+		}
 	}
-	
-	if (! [[_aboutWindowConstroller window] isVisible]) {
-		NSRect screenFrame = [[NSScreen mainScreen] frame];
-		NSRect windowFrame = [[_aboutWindowConstroller window] frame];
-		[[_aboutWindowConstroller window] setFrameOrigin:NSMakePoint(((NSWidth(screenFrame) - NSWidth(windowFrame)) / 2), NSMaxY(screenFrame) - NSHeight(windowFrame) - 200)];
-	}
-	
-	[_aboutWindowConstroller showWindow:nil];
+	[NSApp orderFrontStandardAboutPanel:sender];
+	[NSApp activateIgnoringOtherApps:YES];
 }
 
 
@@ -1051,14 +1009,10 @@ extern int gAPAllLimitsPaused;
 	if (! _preferencesWindowController) {
 		_preferencesWindowController = [[APPreferencesController alloc] init];
 	}
-	
-	if (! [[_aboutWindowConstroller window] isVisible]) {
-		NSRect screenFrame = [[NSScreen mainScreen] frame];
-		NSRect windowFrame = [[_preferencesWindowController window] frame];
-		[[_preferencesWindowController window] setFrameOrigin:NSMakePoint(((NSWidth(screenFrame) - NSWidth(windowFrame)) / 2), NSMaxY(screenFrame) - NSHeight(windowFrame) - 200)];
-	}
-	
+
+	[[_preferencesWindowController window] center];
 	[_preferencesWindowController showWindow:nil];
+	[NSApp activateIgnoringOtherApps:YES];
 }
 
 
@@ -1081,7 +1035,7 @@ extern int gAPAllLimitsPaused;
 }
 
 
-- (CMMenu *)mainMenu {
+- (NSMenu *)mainMenu {
 	return _mainMenu;
 }
 
@@ -1103,6 +1057,28 @@ extern int gAPAllLimitsPaused;
 		if ([_runningApplications count] == 0)
 			return;
 	}
+}
+
+- (void)menuDidClose:(NSMenu *)menu {
+	// Hide the AppInspector view
+	NSArray *items = [menu itemArray];
+	for(NSMenuItem *i in items) {
+		if([i view]) [i setView:nil];
+	}
+}
+
+- (void)menu:(NSMenu *)menu willHighlightItem:(NSMenuItem *)item {
+	// If we don't return here when the item is nil, we'll crash.  We can't even remove the item from the menu.
+	if(!item) return;
+
+	AppInspector *appInspector = [self appInspector];
+	[appInspector setAttachedToItem:item];
+
+	NSArray *items = [menu itemArray];
+	for(NSMenuItem *i in items) {
+		if([i view]) [i setView:nil];
+	}
+	[item setView:[appInspector appView]];
 }
 
 @end

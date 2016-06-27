@@ -1,5 +1,5 @@
 //
-//  AppInspectorController.h
+//  AppInspector.h
 //  AppPolice
 //
 //  Created by Maksym on 7/2/13.
@@ -7,7 +7,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <ChromeMenu/ChromeMenu.h>
 
 #define APApplicationInfoNameKey @"appInfoNameKey"
 #define APApplicationInfoIconKey @"appInfoIconKey"
@@ -15,24 +14,15 @@
 #define APApplicationInfoLimitKey @"appInfoLimitKey"
 #define APApplicationInfoUserKey @"appInfoUserKey"
 
-#define APAppInspectorPopoverDidShow @"appInspectorPopoverDidShow"
 #define APAppInspectorProcessDidChangeLimit @"appInspectorProcDidChangeLim"
 
 
-//@class NSObject, NSView, NSViewController, NSPopover, NSSlider, NSLevelIndicator;
-//@class CMMenuItem;
-//@protocol NSPopoverDelegate;
-
-@interface AppInspector : NSObject <NSPopoverDelegate>
+@interface AppInspector : NSObject
 {
 	@private
-//	NSMutableDictionary *_applicationInfo;
-	CMMenuItem *_attachedToItem;
-	IBOutlet NSPopover *_popover;
-	IBOutlet NSViewController *_popoverViewController;
-	IBOutlet NSView *_popoverView;
-//	IBOutlet NSWindow *detachedWindow;
-	void (^_popoverDidClosehandler)(void);
+	NSMenuItem *_attachedToItem;
+	IBOutlet NSViewController *_appViewController;
+	IBOutlet NSView *_appView;
 	NSTimer *_cpuTimer;
 	struct {
 		uint64_t cputime;
@@ -50,19 +40,10 @@
 	IBOutlet NSTextField *_sliderRightTextfield;
 	IBOutlet NSSlider *_slider;
 	IBOutlet NSLevelIndicator *_levelIndicator;
-	NSPopover *_hintPopover;
 }
 
-// temp method
-//- (void)showPopoverRelativeTo:(NSView *)view;
-- (NSPopover *)popover;
-- (void)setPopverDidCloseHandler:(void (^)(void))handler;
-
-// as part of AppLimitHintViewDelegate
-//- (void)mouseUp:(id)sender;
-
 @property (assign) NSMutableDictionary *applicationInfo;
-@property (assign, nonatomic) CMMenuItem *attachedToItem;
-
+@property (assign, nonatomic) NSMenuItem *attachedToItem;
+@property (readonly) NSView *appView;
 
 @end

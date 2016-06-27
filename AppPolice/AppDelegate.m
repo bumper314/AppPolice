@@ -7,9 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "StatusbarItemController.h"
 #import "StatusbarMenuController.h"
-#import <ChromeMenu/ChromeMenu.h>
 
 #include "C/proc_cpulim.h"
 #include "C/selfprofile.h"
@@ -19,22 +17,18 @@
 
 
 - (void)dealloc {
-	[_statusbarItemController release];
 	[_statusbarMenuController release];
     [super dealloc];
 }
 
 
 - (void)applicationWillFinishLaunching:(NSNotification *)notification {
-	_statusbarItemController = [[StatusbarItemController alloc] init];
-//	NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"status_icon" ofType:@"tiff"];
-//	NSImage *ico = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
-//	imagePath = [[NSBundle mainBundle] pathForResource:@"status_icon_inv" ofType:@"tiff"];
-//	NSImage *ico_alt = [[[NSImage alloc] initWithContentsOfFile:imagePath] autorelease];
 	NSImage *ico = [NSImage imageNamed:@"status_icon"];
-	NSImage *ico_alt = [NSImage imageNamed:@"status_icon_inv"];
-	[_statusbarItemController setImage:ico];
-	[_statusbarItemController setAlternateImage:ico_alt];
+	[ico setTemplate:YES];
+	_statusbarItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+	[_statusbarItem retain];
+	[_statusbarItem setImage:ico];
+	[_statusbarItem setHighlightMode:YES];
 }
 
 
@@ -46,8 +40,8 @@
 	
 	// Add status item with menu
 	_statusbarMenuController = [[StatusbarMenuController alloc] init];
-	CMMenu *mainMenu = [_statusbarMenuController mainMenu];
-	[_statusbarItemController setStatusbarItemMenu:mainMenu];
+	NSMenu *mainMenu = [_statusbarMenuController mainMenu];
+	[_statusbarItem setMenu:mainMenu];
 
 	// Register default preferences
 	NSString *defaultsPath = [[NSBundle mainBundle] pathForResource:@"UserDefaults" ofType:@"plist"];

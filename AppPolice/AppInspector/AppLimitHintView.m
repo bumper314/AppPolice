@@ -21,14 +21,6 @@
 
 - (void)viewDidMoveToSuperview {
 	[self updateTrackingAreas];
-	
-	if (! _observingAppInspectorNotifications) {
-		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(appInsepctorPopoverDidShowNotificationHandler:)
-													 name:APAppInspectorPopoverDidShow
-												   object:nil];
-		_observingAppInspectorNotifications = YES;
-	}
 }
 
 
@@ -77,11 +69,5 @@
 	
 //	[super mouseUp:theEvent];
 }
-
-
-- (void)appInsepctorPopoverDidShowNotificationHandler:(NSNotification *)notification {
-	[self updateTrackingAreas];
-}
-
 
 @end

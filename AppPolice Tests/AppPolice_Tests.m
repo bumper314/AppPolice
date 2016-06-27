@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <ChromeMenu/ChromeMenu.h>
 
 @interface AppPolice_Tests : XCTestCase
 
@@ -28,7 +27,7 @@
 }
 
 - (void)testMenuIsCreating {
-	CMMenu *menu = [[CMMenu alloc] init];
+	NSMenu *menu = [[NSMenu alloc] init];
 	XCTAssertNotNil(menu, @"Menu could not be created.");
 }
 

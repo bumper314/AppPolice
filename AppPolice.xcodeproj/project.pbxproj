@@ -7,18 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34A22D421D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A22D411D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.m */; };
+		34A22D481D1F6DE30084E3F2 /* NSMenu+APAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A22D471D1F6DE30084E3F2 /* NSMenu+APAdditions.m */; };
+		34A22D4D1D20DDB60084E3F2 /* AppLoadLevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A22D4C1D20DDB60084E3F2 /* AppLoadLevelIndicator.m */; };
+		34A22D4F1D20EA0B0084E3F2 /* status_icon.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 34A22D4E1D20EA0B0084E3F2 /* status_icon.pdf */; };
 		A00C3B2E183F8937005E596C /* UserDefaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = A00C3B2D183F8937005E596C /* UserDefaults.plist */; };
 		A00D28551803E85F00D71F71 /* AppLimitSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A00D28541803E85F00D71F71 /* AppLimitSliderCell.m */; };
 		A00FBF4D17DF54BF0083B482 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A00FBF4C17DF54BF0083B482 /* QuartzCore.framework */; };
 		A0100693182106A10017296D /* app_inspector_c.c in Sources */ = {isa = PBXBuildFile; fileRef = A0100692182106A10017296D /* app_inspector_c.c */; };
-		A01191671807DEF8004777D9 /* StatusbarItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = A01191661807DEF8004777D9 /* StatusbarItemView.m */; };
 		A011916A1807E2EF004777D9 /* StatusbarMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = A01191691807E2EF004777D9 /* StatusbarMenuController.m */; };
-		A011916D1807E812004777D9 /* StatusbarItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = A011916C1807E812004777D9 /* StatusbarItemController.m */; };
-		A01453BD17833F4D00FFFB39 /* AppInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0154E811782E300008CF159 /* AppInspector.xib */; };
-		A01453BE17833F5700FFFB39 /* PopoverContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0154E7F1782E05B008CF159 /* PopoverContentView.xib */; };
+		A01453BE17833F5700FFFB39 /* AppInspectorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0154E7F1782E05B008CF159 /* AppInspectorView.xib */; };
 		A0154E851782EC6F008CF159 /* AppInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = A0154E841782E972008CF159 /* AppInspector.m */; };
-		A0448B5B183BBE7A0056818A /* ChromeMenu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0448B58183BBE490056818A /* ChromeMenu.framework */; };
-		A0448B61183BEB9D0056818A /* ChromeMenu.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = A0448B58183BBE490056818A /* ChromeMenu.framework */; };
 		A04FA3D3174D4BD9002E688C /* selfprofile.c in Sources */ = {isa = PBXBuildFile; fileRef = A04FA3D2174D4BD9002E688C /* selfprofile.c */; };
 		A063796817492AEF006F2347 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A063796717492AEF006F2347 /* Cocoa.framework */; };
 		A063797217492AEF006F2347 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A063797017492AEF006F2347 /* InfoPlist.strings */; };
@@ -32,40 +31,13 @@
 		A071B69517D8812500D3866E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A071B69417D8812500D3866E /* XCTest.framework */; };
 		A071B69B17D8812500D3866E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A071B69917D8812500D3866E /* InfoPlist.strings */; };
 		A071B69D17D8812500D3866E /* AppPolice_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A071B69C17D8812500D3866E /* AppPolice_Tests.m */; };
-		A07E4B87183CB64900D773E5 /* APAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E4B85183CB64900D773E5 /* APAboutWindowController.m */; };
-		A07E4B89183CB66F00D773E5 /* APAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A07E4B8B183CB66F00D773E5 /* APAboutWindow.xib */; };
 		A07E4B90183CBD1900D773E5 /* APPreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E4B8E183CBD1900D773E5 /* APPreferencesController.m */; };
-		A07E4B94183CE46700D773E5 /* APURLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A07E4B93183CE46700D773E5 /* APURLTextField.m */; };
 		A0ADD314174A1438002BAADE /* subroutines.c in Sources */ = {isa = PBXBuildFile; fileRef = A0ADD313174A1438002BAADE /* subroutines.c */; };
-		A0AED3B41802B571005F4F9D /* AppLoadLevelIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AED3B31802B571005F4F9D /* AppLoadLevelIndicator.m */; };
-		A0AED3B71802EA9E005F4F9D /* AppInfoBlockView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0AED3B61802EA9E005F4F9D /* AppInfoBlockView.m */; };
-		A0B5AD3418259455006E9898 /* AppPopoverContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B5AD3318259455006E9898 /* AppPopoverContentView.m */; };
 		A0BD1BEA183E10680054FC06 /* APPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0BD1BEC183E10680054FC06 /* APPreferencesWindow.xib */; };
 		A0FFE0A91805D673007F510E /* AppLimitHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FFE0A81805D673007F510E /* AppLimitHintView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A0448B57183BBE490056818A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0448B52183BBE490056818A /* ChromeMenu.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A04489BD183B65840056818A;
-			remoteInfo = ChromeMenu;
-		};
-		A0448B59183BBE490056818A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0448B52183BBE490056818A /* ChromeMenu.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A04489D4183B65850056818A;
-			remoteInfo = ChromeMenuTests;
-		};
-		A0448B5C183BBE8D0056818A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0448B52183BBE490056818A /* ChromeMenu.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = A04489BC183B65840056818A;
-			remoteInfo = ChromeMenu;
-		};
 		A071B69F17D8812500D3866E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A063795C17492AEF006F2347 /* Project object */;
@@ -82,7 +54,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A0448B61183BEB9D0056818A /* ChromeMenu.framework in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,24 +61,25 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		34A22D401D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMenuItem+APAdditions.h"; path = "Other/NSMenuItem+APAdditions.h"; sourceTree = "<group>"; };
+		34A22D411D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMenuItem+APAdditions.m"; path = "Other/NSMenuItem+APAdditions.m"; sourceTree = "<group>"; };
+		34A22D461D1F6DE30084E3F2 /* NSMenu+APAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMenu+APAdditions.h"; path = "Other/NSMenu+APAdditions.h"; sourceTree = "<group>"; };
+		34A22D471D1F6DE30084E3F2 /* NSMenu+APAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMenu+APAdditions.m"; path = "Other/NSMenu+APAdditions.m"; sourceTree = "<group>"; };
+		34A22D4B1D20DDB60084E3F2 /* AppLoadLevelIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppLoadLevelIndicator.h; path = AppInspector/AppLoadLevelIndicator.h; sourceTree = "<group>"; };
+		34A22D4C1D20DDB60084E3F2 /* AppLoadLevelIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppLoadLevelIndicator.m; path = AppInspector/AppLoadLevelIndicator.m; sourceTree = "<group>"; };
+		34A22D4E1D20EA0B0084E3F2 /* status_icon.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = status_icon.pdf; sourceTree = "<group>"; };
 		A00C3B2D183F8937005E596C /* UserDefaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = UserDefaults.plist; sourceTree = "<group>"; };
 		A00D28531803E85F00D71F71 /* AppLimitSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppLimitSliderCell.h; path = AppInspector/AppLimitSliderCell.h; sourceTree = "<group>"; };
 		A00D28541803E85F00D71F71 /* AppLimitSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppLimitSliderCell.m; path = AppInspector/AppLimitSliderCell.m; sourceTree = "<group>"; };
 		A00FBF4C17DF54BF0083B482 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A0100691182106900017296D /* app_inspector_c.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = app_inspector_c.h; path = C/app_inspector_c.h; sourceTree = "<group>"; };
 		A0100692182106A10017296D /* app_inspector_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = app_inspector_c.c; path = C/app_inspector_c.c; sourceTree = "<group>"; };
-		A01191651807DEF8004777D9 /* StatusbarItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusbarItemView.h; path = Statusbar/StatusbarItemView.h; sourceTree = "<group>"; };
-		A01191661807DEF8004777D9 /* StatusbarItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusbarItemView.m; path = Statusbar/StatusbarItemView.m; sourceTree = "<group>"; };
 		A01191681807E2EF004777D9 /* StatusbarMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusbarMenuController.h; path = Statusbar/StatusbarMenuController.h; sourceTree = "<group>"; };
 		A01191691807E2EF004777D9 /* StatusbarMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusbarMenuController.m; path = Statusbar/StatusbarMenuController.m; sourceTree = "<group>"; };
-		A011916B1807E812004777D9 /* StatusbarItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusbarItemController.h; path = Statusbar/StatusbarItemController.h; sourceTree = "<group>"; };
-		A011916C1807E812004777D9 /* StatusbarItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusbarItemController.m; path = Statusbar/StatusbarItemController.m; sourceTree = "<group>"; };
-		A0154E801782E05B008CF159 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PopoverContentView.xib; sourceTree = "<group>"; };
-		A0154E821782E300008CF159 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AppInspector.xib; sourceTree = "<group>"; };
+		A0154E801782E05B008CF159 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AppInspectorView.xib; sourceTree = "<group>"; };
 		A0154E831782E972008CF159 /* AppInspector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppInspector.h; path = AppInspector/AppInspector.h; sourceTree = "<group>"; };
 		A0154E841782E972008CF159 /* AppInspector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppInspector.m; path = AppInspector/AppInspector.m; sourceTree = "<group>"; };
 		A0448A5D183B7BD60056818A /* AppPolice.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AppPolice.entitlements; sourceTree = "<group>"; };
-		A0448B52183BBE490056818A /* ChromeMenu.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ChromeMenu.xcodeproj; path = ../ChromeMenu/ChromeMenu.xcodeproj; sourceTree = "<group>"; };
 		A04FA3D2174D4BD9002E688C /* selfprofile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = selfprofile.c; path = C/selfprofile.c; sourceTree = "<group>"; };
 		A04FA3D4174D4BF5002E688C /* selfprofile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = selfprofile.h; path = C/selfprofile.h; sourceTree = "<group>"; };
 		A063796417492AEF006F2347 /* AppPolice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppPolice.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,9 +97,7 @@
 		A063797D17492AF0006F2347 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		A063798517492D19006F2347 /* proc_cpulim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = proc_cpulim.h; path = C/proc_cpulim.h; sourceTree = "<group>"; };
 		A063798617492D42006F2347 /* proc_cpulim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = proc_cpulim.c; path = C/proc_cpulim.c; sourceTree = "<group>"; };
-		A067A0B61836966C003B677E /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/PopoverContentView.xib; sourceTree = "<group>"; };
 		A067A0B818369681003B677E /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		A067A0BA18369686003B677E /* ru */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A067A0C518369782003B677E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		A071B69317D8812500D3866E /* AppPolice Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AppPolice Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A071B69417D8812500D3866E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -135,24 +105,11 @@
 		A071B69A17D8812500D3866E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A071B69C17D8812500D3866E /* AppPolice_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppPolice_Tests.m; sourceTree = "<group>"; };
 		A071B69E17D8812500D3866E /* AppPolice Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppPolice Tests-Prefix.pch"; sourceTree = "<group>"; };
-		A07E4B84183CB64900D773E5 /* APAboutWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APAboutWindowController.h; path = Other/APAboutWindowController.h; sourceTree = "<group>"; };
-		A07E4B85183CB64900D773E5 /* APAboutWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APAboutWindowController.m; path = Other/APAboutWindowController.m; sourceTree = "<group>"; };
-		A07E4B8A183CB66F00D773E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/APAboutWindow.xib; sourceTree = "<group>"; };
-		A07E4B8C183CB68400D773E5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/APAboutWindow.xib; sourceTree = "<group>"; };
 		A07E4B8D183CBD1900D773E5 /* APPreferencesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APPreferencesController.h; path = Other/APPreferencesController.h; sourceTree = "<group>"; };
 		A07E4B8E183CBD1900D773E5 /* APPreferencesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APPreferencesController.m; path = Other/APPreferencesController.m; sourceTree = "<group>"; };
-		A07E4B92183CE46700D773E5 /* APURLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APURLTextField.h; path = Other/APURLTextField.h; sourceTree = "<group>"; };
-		A07E4B93183CE46700D773E5 /* APURLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APURLTextField.m; path = Other/APURLTextField.m; sourceTree = "<group>"; };
 		A0ADD312174A142A002BAADE /* subroutines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = subroutines.h; path = C/subroutines.h; sourceTree = "<group>"; };
 		A0ADD313174A1438002BAADE /* subroutines.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = subroutines.c; path = C/subroutines.c; sourceTree = "<group>"; };
-		A0AED3B21802B571005F4F9D /* AppLoadLevelIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppLoadLevelIndicator.h; path = AppInspector/AppLoadLevelIndicator.h; sourceTree = "<group>"; };
-		A0AED3B31802B571005F4F9D /* AppLoadLevelIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppLoadLevelIndicator.m; path = AppInspector/AppLoadLevelIndicator.m; sourceTree = "<group>"; };
-		A0AED3B51802EA9E005F4F9D /* AppInfoBlockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppInfoBlockView.h; path = AppInspector/AppInfoBlockView.h; sourceTree = "<group>"; };
-		A0AED3B61802EA9E005F4F9D /* AppInfoBlockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppInfoBlockView.m; path = AppInspector/AppInfoBlockView.m; sourceTree = "<group>"; };
-		A0B5AD3218259455006E9898 /* AppPopoverContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppPopoverContentView.h; path = AppInspector/AppPopoverContentView.h; sourceTree = "<group>"; };
-		A0B5AD3318259455006E9898 /* AppPopoverContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppPopoverContentView.m; path = AppInspector/AppPopoverContentView.m; sourceTree = "<group>"; };
 		A0BD1BEB183E10680054FC06 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/APPreferencesWindow.xib; sourceTree = "<group>"; };
-		A0BD1BED183E106F0054FC06 /* ru */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ru; path = ru.lproj/APPreferencesWindow.xib; sourceTree = "<group>"; };
 		A0FFE0A71805D673007F510E /* AppLimitHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppLimitHintView.h; path = AppInspector/AppLimitHintView.h; sourceTree = "<group>"; };
 		A0FFE0A81805D673007F510E /* AppLimitHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppLimitHintView.m; path = AppInspector/AppLimitHintView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -162,7 +119,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0448B5B183BBE7A0056818A /* ChromeMenu.framework in Frameworks */,
 				A00FBF4D17DF54BF0083B482 /* QuartzCore.framework in Frameworks */,
 				A063796817492AEF006F2347 /* Cocoa.framework in Frameworks */,
 			);
@@ -184,10 +140,6 @@
 			children = (
 				A01191681807E2EF004777D9 /* StatusbarMenuController.h */,
 				A01191691807E2EF004777D9 /* StatusbarMenuController.m */,
-				A011916B1807E812004777D9 /* StatusbarItemController.h */,
-				A011916C1807E812004777D9 /* StatusbarItemController.m */,
-				A01191651807DEF8004777D9 /* StatusbarItemView.h */,
-				A01191661807DEF8004777D9 /* StatusbarItemView.m */,
 			);
 			name = Statusbar;
 			sourceTree = "<group>";
@@ -197,16 +149,12 @@
 			children = (
 				A0154E831782E972008CF159 /* AppInspector.h */,
 				A0154E841782E972008CF159 /* AppInspector.m */,
-				A0B5AD3218259455006E9898 /* AppPopoverContentView.h */,
-				A0B5AD3318259455006E9898 /* AppPopoverContentView.m */,
-				A0AED3B21802B571005F4F9D /* AppLoadLevelIndicator.h */,
-				A0AED3B31802B571005F4F9D /* AppLoadLevelIndicator.m */,
 				A00D28531803E85F00D71F71 /* AppLimitSliderCell.h */,
 				A00D28541803E85F00D71F71 /* AppLimitSliderCell.m */,
-				A0AED3B51802EA9E005F4F9D /* AppInfoBlockView.h */,
-				A0AED3B61802EA9E005F4F9D /* AppInfoBlockView.m */,
 				A0FFE0A71805D673007F510E /* AppLimitHintView.h */,
 				A0FFE0A81805D673007F510E /* AppLimitHintView.m */,
+				34A22D4B1D20DDB60084E3F2 /* AppLoadLevelIndicator.h */,
+				34A22D4C1D20DDB60084E3F2 /* AppLoadLevelIndicator.m */,
 				A0154E7D1782DF16008CF159 /* Resources */,
 			);
 			name = AppInspector;
@@ -215,25 +163,14 @@
 		A0154E7D1782DF16008CF159 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A0154E811782E300008CF159 /* AppInspector.xib */,
-				A0154E7F1782E05B008CF159 /* PopoverContentView.xib */,
+				A0154E7F1782E05B008CF159 /* AppInspectorView.xib */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		A0448B53183BBE490056818A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A0448B58183BBE490056818A /* ChromeMenu.framework */,
-				A0448B5A183BBE490056818A /* ChromeMenuTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A063795B17492AEF006F2347 = {
 			isa = PBXGroup;
 			children = (
-				A0448B52183BBE490056818A /* ChromeMenu.xcodeproj */,
 				A063796D17492AEF006F2347 /* AppPolice */,
 				A071B69617D8812500D3866E /* AppPolice Tests */,
 				A063796617492AEF006F2347 /* Frameworks */,
@@ -289,9 +226,9 @@
 		A063796E17492AEF006F2347 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				34A22D4E1D20EA0B0084E3F2 /* status_icon.pdf */,
 				A0448A5D183B7BD60056818A /* AppPolice.entitlements */,
 				A063797C17492AF0006F2347 /* MainMenu.xib */,
-				A07E4B8B183CB66F00D773E5 /* APAboutWindow.xib */,
 				A0BD1BEC183E10680054FC06 /* APPreferencesWindow.xib */,
 				A063796F17492AEF006F2347 /* AppPolice-Info.plist */,
 				A063797017492AEF006F2347 /* InfoPlist.strings */,
@@ -341,12 +278,12 @@
 		A07E4B6F183CB3F600D773E5 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				A07E4B84183CB64900D773E5 /* APAboutWindowController.h */,
-				A07E4B85183CB64900D773E5 /* APAboutWindowController.m */,
 				A07E4B8D183CBD1900D773E5 /* APPreferencesController.h */,
 				A07E4B8E183CBD1900D773E5 /* APPreferencesController.m */,
-				A07E4B92183CE46700D773E5 /* APURLTextField.h */,
-				A07E4B93183CE46700D773E5 /* APURLTextField.m */,
+				34A22D461D1F6DE30084E3F2 /* NSMenu+APAdditions.h */,
+				34A22D471D1F6DE30084E3F2 /* NSMenu+APAdditions.m */,
+				34A22D401D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.h */,
+				34A22D411D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.m */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -366,7 +303,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A0448B5D183BBE8D0056818A /* PBXTargetDependency */,
 			);
 			name = AppPolice;
 			productName = cpulim;
@@ -418,17 +354,10 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				ru,
 			);
 			mainGroup = A063795B17492AEF006F2347;
 			productRefGroup = A063796517492AEF006F2347 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = A0448B53183BBE490056818A /* Products */;
-					ProjectRef = A0448B52183BBE490056818A /* ChromeMenu.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				A063796317492AEF006F2347 /* AppPolice */,
@@ -437,35 +366,17 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		A0448B58183BBE490056818A /* ChromeMenu.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ChromeMenu.framework;
-			remoteRef = A0448B57183BBE490056818A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		A0448B5A183BBE490056818A /* ChromeMenuTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChromeMenuTests.xctest;
-			remoteRef = A0448B59183BBE490056818A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		A063796217492AEF006F2347 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A01453BE17833F5700FFFB39 /* PopoverContentView.xib in Resources */,
+				A01453BE17833F5700FFFB39 /* AppInspectorView.xib in Resources */,
 				A00C3B2E183F8937005E596C /* UserDefaults.plist in Resources */,
-				A01453BD17833F4D00FFFB39 /* AppInspector.xib in Resources */,
 				A063797217492AEF006F2347 /* InfoPlist.strings in Resources */,
-				A07E4B89183CB66F00D773E5 /* APAboutWindow.xib in Resources */,
 				A063797817492AEF006F2347 /* Credits.rtf in Resources */,
 				A0BD1BEA183E10680054FC06 /* APPreferencesWindow.xib in Resources */,
+				34A22D4F1D20EA0B0084E3F2 /* status_icon.pdf in Resources */,
 				A063797E17492AF0006F2347 /* MainMenu.xib in Resources */,
 				A067A0C618369782003B677E /* Media.xcassets in Resources */,
 				A067A0B718369681003B677E /* Localizable.strings in Resources */,
@@ -487,22 +398,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0AED3B71802EA9E005F4F9D /* AppInfoBlockView.m in Sources */,
 				A00D28551803E85F00D71F71 /* AppLimitSliderCell.m in Sources */,
 				A0FFE0A91805D673007F510E /* AppLimitHintView.m in Sources */,
-				A0B5AD3418259455006E9898 /* AppPopoverContentView.m in Sources */,
-				A0AED3B41802B571005F4F9D /* AppLoadLevelIndicator.m in Sources */,
+				34A22D421D1F6BFD0084E3F2 /* NSMenuItem+APAdditions.m in Sources */,
 				A0100693182106A10017296D /* app_inspector_c.c in Sources */,
-				A07E4B87183CB64900D773E5 /* APAboutWindowController.m in Sources */,
 				A011916A1807E2EF004777D9 /* StatusbarMenuController.m in Sources */,
-				A01191671807DEF8004777D9 /* StatusbarItemView.m in Sources */,
 				A063797417492AEF006F2347 /* main.m in Sources */,
+				34A22D481D1F6DE30084E3F2 /* NSMenu+APAdditions.m in Sources */,
+				34A22D4D1D20DDB60084E3F2 /* AppLoadLevelIndicator.m in Sources */,
 				A063797B17492AEF006F2347 /* AppDelegate.m in Sources */,
 				A063798717492D42006F2347 /* proc_cpulim.c in Sources */,
 				A0ADD314174A1438002BAADE /* subroutines.c in Sources */,
-				A07E4B94183CE46700D773E5 /* APURLTextField.m in Sources */,
 				A04FA3D3174D4BD9002E688C /* selfprofile.c in Sources */,
-				A011916D1807E812004777D9 /* StatusbarItemController.m in Sources */,
 				A0154E851782EC6F008CF159 /* AppInspector.m in Sources */,
 				A07E4B90183CBD1900D773E5 /* APPreferencesController.m in Sources */,
 			);
@@ -519,11 +426,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A0448B5D183BBE8D0056818A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ChromeMenu;
-			targetProxy = A0448B5C183BBE8D0056818A /* PBXContainerItemProxy */;
-		};
 		A071B6A017D8812500D3866E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A063796317492AEF006F2347 /* AppPolice */;
@@ -532,21 +434,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A0154E7F1782E05B008CF159 /* PopoverContentView.xib */ = {
+		A0154E7F1782E05B008CF159 /* AppInspectorView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A0154E801782E05B008CF159 /* en */,
-				A067A0B61836966C003B677E /* ru */,
 			);
-			name = PopoverContentView.xib;
-			sourceTree = "<group>";
-		};
-		A0154E811782E300008CF159 /* AppInspector.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A0154E821782E300008CF159 /* en */,
-			);
-			name = AppInspector.xib;
+			name = AppInspectorView.xib;
 			sourceTree = "<group>";
 		};
 		A063797017492AEF006F2347 /* InfoPlist.strings */ = {
@@ -577,7 +470,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A067A0B818369681003B677E /* en */,
-				A067A0BA18369686003B677E /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -590,20 +482,10 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		A07E4B8B183CB66F00D773E5 /* APAboutWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A07E4B8A183CB66F00D773E5 /* en */,
-				A07E4B8C183CB68400D773E5 /* ru */,
-			);
-			name = APAboutWindow.xib;
-			sourceTree = "<group>";
-		};
 		A0BD1BEC183E10680054FC06 /* APPreferencesWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				A0BD1BEB183E10680054FC06 /* en */,
-				A0BD1BED183E106F0054FC06 /* ru */,
 			);
 			name = APPreferencesWindow.xib;
 			sourceTree = "<group>";
@@ -622,7 +504,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Definemac Code Signing Certificate";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -655,7 +536,6 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Definemac Code Signing Certificate";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -677,7 +557,6 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -695,7 +574,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "AppPolice/AppPolice-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = AppPolice;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
@@ -709,7 +588,6 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
-				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)";
@@ -728,7 +606,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
 				INFOPLIST_FILE = "AppPolice/AppPolice-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = AppPolice;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;

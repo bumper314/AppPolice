@@ -4,4 +4,6 @@
 
 #ifdef __OBJC__
 	#import <Cocoa/Cocoa.h>
+	#import "NSMenu+APAdditions.h"
+	#import "NSMenuItem+APAdditions.h"
 #endif
